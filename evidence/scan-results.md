@@ -4,9 +4,27 @@
 
 ## Pipeline run
 
-<!-- Add links to the first GitHub Actions runs once pushed: one passing, one blocked. -->
+### GitHub Actions
 
-The workflow hasn't run on GitHub yet. Every stage below was run locally on 2026-11-07 with the same tool versions and images as the workflow. For each gate there is a passing run on this repo and a blocked run on a deliberately insecure sample.
+[First run](https://github.com/irfancen/platform-sandbox/actions/runs/42348532475), triggered by the push of commit `9c23978` on 2026-11-07. It took 3 minutes on GitHub-hosted `ubuntu-24.04` runners.
+
+| Job | Result |
+|---|---|
+| source-validation | ✅ success |
+| terraform-validate | ✅ success |
+| secret-scan | ✅ success |
+| sca | ✅ success |
+| iac-checkov | ✅ success |
+| container-scan | ✅ success |
+| dast | ✅ success |
+| sast | ❌ failure: no SonarQube Cloud project configured |
+| deploy | ⏭️ skipped, because a gate failed |
+
+`sast` fails because no SonarQube Cloud organization, project or token is set up for this repository (`You must define the following mandatory properties: sonar.projectKey, sonar.organization`). This is the intended behaviour: SAST fails closed, so a missing scan blocks the release instead of being silently skipped, and `deploy` didn't run. The SAST results below come from a local SonarQube server instead.
+
+### Local runs
+
+Every stage was also run locally on 2026-11-07, with the same tool versions and images as the workflow. For each gate there is a passing run on this repo and a blocked run on a deliberately insecure sample.
 
 | Stage | This repo | Insecure sample |
 |---|---|---|

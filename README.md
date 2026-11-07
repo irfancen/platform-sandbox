@@ -439,7 +439,7 @@ docker run --rm -p 8080:8080 --read-only --cap-drop ALL -e APP_API_KEY="$(openss
   - DAST doesn't cover business-logic flaws such as one client reaching another's data; that needs per-user authorization tests.
   - Running offline skips 6 beta passive rules that ZAP would otherwise download at startup. To include them, build a ZAP image with those add-ons baked in.
 - **Deployment is simulated:** the `deploy` job demonstrates the approval and artifact promotion, but doesn't push to ECR or roll out to EKS.
-- **Pipeline not yet run on GitHub:** every stage was run locally with the same commands and images (see the evidence). The first push will confirm the hosted run.
+- **SAST not connected in CI:** no SonarQube Cloud project is set up for this repository, so on GitHub `sast` fails and blocks `deploy` by design. Every other job passes on GitHub (see the [evidence](evidence/scan-results.md#github-actions)). SAST was verified against a local SonarQube server.
 
 ## 9. Evidence
 
