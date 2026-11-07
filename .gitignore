@@ -1,0 +1,42 @@
+# Terraform: state, plans and variable files can contain secrets (see Task 3, Scenario C).
+# .terraform.lock.hcl is intentionally committed to pin provider versions.
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.coverage
+coverage.xml
+
+# Local scan outputs
+image.tar
+reports/
+.scannerwork/
+
+# Architecture: only the rendered diagram is committed
+architecture/*
+!architecture/architecture-diagram.png
+
+# Local secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
